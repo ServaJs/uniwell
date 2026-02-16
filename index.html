@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniWell – Your Online Nurse Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="blob bg-indigo-300 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="blob bg-teal-200 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 animation-delay-2000"></div>
+    <div class="blob bg-rose-200 w-64 h-64 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40"></div>
+
+        <header>
+            <div class="logo">
+                <i class="fas fa-heart-pulse text-white text-lg" style="border-radius: 30%;"></i>
+                <span class="text-xl font-bold tracking-tight text-slate-800">UniWell</span>
+            </div>
+            
+           <div class="search-feature">
+            <input type="text"
+                 class="block w-full pl-10 pr-10 py-2.5 border-none rounded-full leading-5 bg-white/80 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white shadow-sm transition-all duration-300"
+            placeholder="Search symptoms, FAQ's, or resources...">
+           </div>
+        </header>
+        <section class="feature-content">
+           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium mb-6 border border-indigo-100">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                Online Nurse Companion
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
+                How can I <br/>
+                <span class="gradient-text">help you?</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-500 mb-12 max-w-xl mx-auto">
+                UniWell provides instant health guidance, mental health support, and first aid resources tailored for university life.
+            </p>
+
+            <div class="card-grid">
+                <button onclick="activateMode()">
+                    <div class="card symptom">
+                    <div class="card-icon"><i class="fas fa-stethoscope text-2xl"></i>
+                    </div>
+                        <div class="card-text">
+                            <h3 class="font-bold text-lg text-slate-800">Symptom Check</h3>
+                        <p class="text-sm text-slate-500 mt-1">Personal diagnosis tool</p>
+                        </div>
+                    
+                </div>
+                </button>
+
+                <div class="card mentalHealth">
+                    <div class="card-icon"><i class="fas fa-brain text-2xl"></i></div>
+                        <div class="card-text">
+                            <h3 class="font-bold text-lg text-slate-800">Mental Health</h3>
+                        <p class="text-sm text-slate-500 mt-1">Emotional well-being</p>
+                        </div>
+                    
+                </div>
+
+                <div class="card health">
+                    <div class="card-icon"><i class="fas fa-circle-question text-2xl"></i></div>
+                        <div class="card-text">
+                            <h3 class="font-bold text-lg text-slate-800">Health Questions</h3>
+                        <p class="text-sm text-slate-500 mt-1">FAQ & Common Injuries</p>
+                        </div>
+                </div>
+
+                <div class="card firstAid">
+                    <div class="card-icon"><i class="fas fa-kit-medical text-2xl"></i></div>
+                        <div class="card-text">
+                            <h3 class="font-bold text-lg text-slate-800">First Aid Guide</h3>
+                        <p class="text-sm text-slate-500 mt-1">Emergency Response</p>
+                        </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="symptomPage">
+            <div class="header">
+                <div class="symptomText">
+                    <div class="icon"><i class="fas fa-stethoscope text-2xl"></i></div>
+                    <div class="chatText">
+                        <h1>Symptom Checker</h1>
+                    <p>Let's assess your physical symptomps</p>
+                    </div>
+                </div>
+
+                <button onclick="closePanel()" class="btnClose close space-y-8"><i class="fa-solid fa-x"></i></button>
+            </div>
+
+            <div class="sectionSymptom">
+                <div class="form">
+
+                    <div class="symptomGuide">
+
+                        <div class="icon">
+                           <i class="fa-brands fa-wpforms"></i> <span class="font-bold text-lg text-slate-800">Symptom Form</span>
+                        </div>
+                        <div>
+                            <label>What are you feeling?</label>
+                                    <select id="symptom-type" class="w-full p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+                                        <option>Select symptom...</option>
+                                        <option>Headache</option>
+                                        <option>Stomach pain</option>
+                                        <option>Fever</option>
+                                        <option>Sore throat</option>
+                                        <option>Chest discomfort</option>
+                                        <option>Other</option>
+                                    </select>
+                        </div>
+                        
+                        <div>
+                            <label>When did it start?</label>
+                            <select id="symptom-start" class="w-full p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+                                        <option>Select duration...</option>
+                                        <option>Just now</option>
+                                        <option>Few hours ago</option>
+                                        <option>Since yesterday</option>
+                                        <option>2-3 days</option>
+                                        <option>More than a week</option>
+                                    </select>
+                        </div>
+
+                        <div>
+                            <label>Pain level (1-10)</label>
+                            <input type="range">
+                            <div class="rangeGuide">
+                                <span>Mild</span>
+                                <span>Severe</span>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-x-5 status" style="margin-top: 15%; font-size: 0.95rem;">
+                            <input type="checkbox"><label>Able to attend class?</label>
+                        </div>
+                        
+                        
+
+                        <div class="bg-red-50 border border-red-100 rounded-lg p-3">
+                                    <p class="text-xs text-red-700 font-medium mb-2"><i class="fas fa-exclamation-triangle mr-1"></i> Danger signs:</p>
+                                    <div class="space-y-1">
+                                        <label class="flex items-center space-x-2 text-sm text-gray-700">
+                                            <input type="checkbox" class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                            <span>Chest pain</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm text-gray-700">
+                                            <input type="checkbox" class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                            <span>Fainting/ dizziness</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm text-gray-700">
+                                            <input type="checkbox" class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                            <span>Difficulty breathing</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button class="w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+                                    Submit Assessment
+                                </button>
+                        </div>
+                        </div>
+                    
+
+                <div class="chat-container">
+        <div id="chat-box" class="chat-box">
+            <div class="message bot">Hello! I'm powered by Groq. How can I help?</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-btn" class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors flex items-center space-x-2">
+                                <span>Send</span>
+                                <i class="fas fa-paper-plane text-sm"></i>
+                            </button>
+        </div>
+    </div>
+
+            </div>
+            </div>
+        </div>
+            <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div class="flex items-center space-x-2 text-gray-500 text-sm">
+                    <i class="fas fa-heart-pulse text-indigo-500"></i>
+                    <span>UniWell – Supporting student health and wellness</span>
+                </div>
+                <div class="flex items-center space-x-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-indigo-600 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-indigo-600 transition-colors">Terms of Service</a>
+                    <button class="text-gray-400 hover:text-indigo-600 transition-colors flex items-center space-x-1">
+                        <i class="fas fa-lock text-xs"></i>
+                        <span>Login as Admin</span>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-4 text-center text-xs text-gray-400">
+                <p>Note: UniWell provides general health information and is not a substitute for professional medical advice. In case of emergency, call 911 or your local emergency number.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    </body>
+</html>
