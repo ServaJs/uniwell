@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniWell – Your Online Nurse Companion</title>
+    <title>UniWell - Your Online Nurse Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
-    </head>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col relative">
 
-    <body>
-        <div class="blob bg-indigo-300 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+    <!-- Background Elements -->
+    <div class="blob bg-indigo-300 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
     <div class="blob bg-teal-200 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 animation-delay-2000"></div>
     <div class="blob bg-rose-200 w-64 h-64 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40"></div>
 
-        <header>
-            <div class="logo">
-                <i class="fas fa-heart-pulse text-white text-lg" style="border-radius: 30%;"></i>
-                <span class="text-xl font-bold tracking-tight text-slate-800">UniWell</span>
+    <!-- Navigation / Search Bar -->
+    <nav class="w-full p-6 flex justify-between items-center">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="resetView()">
+            <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                
             </div>
-            
-           <div class="search-feature">
-            <input type="text"
-                 class="block w-full pl-10 pr-10 py-2.5 border-none rounded-full leading-5 bg-white/80 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white shadow-sm transition-all duration-300"
-            placeholder="Search symptoms, FAQ's, or resources...">
-           </div>
-        </header>
-        <section class="feature-content">
-           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium mb-6 border border-indigo-100">
+            <span class="text-xl font-bold tracking-tight text-slate-800">UniWell</span>
+        </div>
+
+        <div class="relative group hidden md:block w-96">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i data-lucide="search" class="h-5 w-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+            </div>
+            <input type="text" 
+                   class="block w-full pl-10 pr-10 py-2.5 border-none rounded-full leading-5 bg-white/80 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white shadow-sm transition-all duration-300" 
+                   placeholder="Search symptoms, FAQs, or resources...">
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer hover:text-rose-500 text-slate-400 transition-colors" onclick="clearSearch()">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </div>
+        </div>
+        
+        <div class="md:hidden">
+            <button class="p-2 text-slate-600 hover:bg-white/50 rounded-full">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 pb-12 relative z-10">
+        
+        <!-- Hero Section -->
+        <div id="hero-section" class="text-center max-w-3xl mx-auto animate-fade-in">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium mb-6 border border-indigo-100">
                 <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                 </span>
                 Online Nurse Companion
             </div>
-
+            
             <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
                 How can I <br/>
                 <span class="gradient-text">help you?</span>
@@ -45,48 +68,64 @@
                 UniWell provides instant health guidance, mental health support, and first aid resources tailored for university life.
             </p>
 
-            <div class="card-grid">
-                <button onclick="activateMode()">
-                    <div class="card symptom">
-                    <div class="card-icon"><i class="fas fa-stethoscope text-2xl"></i>
+            <!-- Service Navigation Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl mx-auto">
+                
+                <!-- Symptom Check -->
+                <button onclick="openMode('symptom')" class="card-hover group relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 text-left h-48 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-rose-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mb-4 relative z-10 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                        <i data-lucide="stethoscope" class="w-6 h-6"></i>
                     </div>
-                        <div class="card-text">
-                            <h3 class="font-bold text-lg text-slate-800">Symptom Check</h3>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg text-slate-800">Symptom Check</h3>
                         <p class="text-sm text-slate-500 mt-1">Personal diagnosis tool</p>
-                        </div>
-                    
-                </div>
+                    </div>
                 </button>
 
-                <div class="card mentalHealth">
-                    <div class="card-icon"><i class="fas fa-brain text-2xl"></i></div>
-                        <div class="card-text">
-                            <h3 class="font-bold text-lg text-slate-800">Mental Health</h3>
+                <!-- Mental Health -->
+                <button onclick="openMode('mental')" class="card-hover group relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 text-left h-48 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-violet-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 bg-violet-100 text-violet-600 rounded-2xl flex items-center justify-center mb-4 relative z-10 group-hover:bg-violet-600 group-hover:text-white transition-colors">
+                        <i data-lucide="brain" class="w-6 h-6"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg text-slate-800">Mental Health</h3>
                         <p class="text-sm text-slate-500 mt-1">Emotional well-being</p>
-                        </div>
-                    
-                </div>
+                    </div>
+                </button>
 
-                <div class="card health">
-                    <div class="card-icon"><i class="fas fa-circle-question text-2xl"></i></div>
-                        <div class="card-text">
-                            <h3 class="font-bold text-lg text-slate-800">Health Questions</h3>
+                <!-- Health Questions -->
+                <button onclick="openMode('faq')" class="card-hover group relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 text-left h-48 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-4 relative z-10 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                        <i data-lucide="help-circle" class="w-6 h-6"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg text-slate-800">Health Questions</h3>
                         <p class="text-sm text-slate-500 mt-1">FAQ & Common Injuries</p>
-                        </div>
-                </div>
+                    </div>
+                </button>
 
-                <div class="card firstAid">
-                    <div class="card-icon"><i class="fas fa-kit-medical text-2xl"></i></div>
-                        <div class="card-text">
-                            <h3 class="font-bold text-lg text-slate-800">First Aid Guide</h3>
-                        <p class="text-sm text-slate-500 mt-1">Emergency Response</p>
-                        </div>
-                </div>
-
+                <!-- First Aid -->
+                <button onclick="openMode('firstaid')" class="card-hover group relative overflow-hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 text-left h-48 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-4 relative z-10 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <i data-lucide="briefcase-medical" class="w-6 h-6"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg text-slate-800">First Aid Guide</h3>
+                        <p class="text-sm text-slate-500 mt-1">Emergency response</p>
+                    </div>
+                </button>
             </div>
-        </section>
+        </div>
 
-        <div class="symptomPage">
+        <!-- Interactive Modes Container (Hidden by default) -->
+        <div id="interactive-container" class="hidden w-full max-w-4xl mx-auto mt-8">
+            
+            <!-- Mode: Symptom Check -->
+             <div id="mode-symptom" class="hidden chat-overlay active symptomPage">
             <div class="header">
                 <div class="symptomText">
                     <div class="icon"><i class="fas fa-stethoscope text-2xl"></i></div>
@@ -96,14 +135,13 @@
                     </div>
                 </div>
 
-                <button onclick="closePanel()" class="btnClose close space-y-8"><i class="fa-solid fa-x"></i></button>
+                <button onclick="resetView()" class="btnClose close space-y-8"><i class="fa-solid fa-x"></i></button>
             </div>
 
             <div class="sectionSymptom">
                 <div class="form">
 
                     <div class="symptomGuide">
-
                         <div class="icon">
                            <i class="fa-brands fa-wpforms"></i> <span class="font-bold text-lg text-slate-800">Symptom Form</span>
                         </div>
@@ -173,44 +211,234 @@
                         </div>
                     
 
-                <div class="chat-container">
-        <div id="chat-box" class="chat-box">
-            <div class="message bot">Hello! I'm powered by Groq. How can I help?</div>
-        </div>
-        <div class="input-area">
-            <input type="text" id="user-input" placeholder="Type a message...">
-            <button id="send-btn" class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors flex items-center space-x-2">
-                                <span>Send</span>
-                                <i class="fas fa-paper-plane text-sm"></i>
-                            </button>
+            <div class="chat-container">
+                <div id="chat-box" class="chat-box">
+                    <div class="message bot">Hello! I'm powered by Groq. How can I help?</div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Type a message...">
+                <button id="send-btn" class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors flex items-center space-x-2">
+                <span>Send</span>
+                <i class="fas fa-paper-plane text-sm"></i>
+                </button>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-            </div>
-            </div>
-        </div>
-            <footer class="bg-white border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                    <i class="fas fa-heart-pulse text-indigo-500"></i>
-                    <span>UniWell – Supporting student health and wellness</span>
+            <!-- Mode: Mental Health -->
+            <div id="mode-mental" class="hidden chat-overlay active">
+                <div class="glass-panel rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row h-[80vh]">
+                    <div class="bg-violet-500 p-8 md:w-1/3 text-white flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                        <div class="relative z-10">
+                            <button onclick="resetView()" class="flex items-center gap-2 text-violet-100 hover:text-white mb-8 transition-colors">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+                            </button>
+                            <h2 class="text-3xl font-bold mb-2">Mental Health Check</h2>
+                            <p class="text-violet-100">Your feelings are valid. Let's take a moment to check in.</p>
+                        </div>
+                        <div class="relative z-10 mt-auto">
+                            <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mb-4">
+                                <i data-lucide="cloud-sun" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:w-2/3 bg-white overflow-y-auto">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-6">How have you been feeling lately?</h3>
+                        <div class="space-y-3">
+                            <!-- Checklist Items -->
+                            <label class="flex items-center p-4 border border-slate-100 rounded-xl hover:bg-violet-50 cursor-pointer transition-colors group">
+                                <input type="checkbox" class="w-5 h-5 text-violet-600 rounded border-slate-300 focus:ring-violet-500">
+                                <span class="ml-3 text-slate-700 group-hover:text-violet-900">Feeling down or hopeless</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-100 rounded-xl hover:bg-violet-50 cursor-pointer transition-colors group">
+                                <input type="checkbox" class="w-5 h-5 text-violet-600 rounded border-slate-300 focus:ring-violet-500">
+                                <span class="ml-3 text-slate-700 group-hover:text-violet-900">Trouble sleeping or sleeping too much</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-100 rounded-xl hover:bg-violet-50 cursor-pointer transition-colors group">
+                                <input type="checkbox" class="w-5 h-5 text-violet-600 rounded border-slate-300 focus:ring-violet-500">
+                                <span class="ml-3 text-slate-700 group-hover:text-violet-900">Feeling overwhelmed by responsibilities</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-100 rounded-xl hover:bg-violet-50 cursor-pointer transition-colors group">
+                                <input type="checkbox" class="w-5 h-5 text-violet-600 rounded border-slate-300 focus:ring-violet-500">
+                                <span class="ml-3 text-slate-700 group-hover:text-violet-900">Lost motivation for hobbies or studies</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-100 rounded-xl hover:bg-violet-50 cursor-pointer transition-colors group">
+                                <input type="checkbox" class="w-5 h-5 text-violet-600 rounded border-slate-300 focus:ring-violet-500">
+                                <span class="ml-3 text-slate-700 group-hover:text-violet-900">Difficulty concentrating on tasks</span>
+                            </label>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                            <p class="text-sm text-blue-800 flex items-center gap-2">
+                                <i data-lucide="info" class="w-4 h-4"></i>
+                                Resources are available 24/7. You are not alone.
+                            </p>
+                        </div>
+
+                        <button onclick="alert('Connecting you to resources...')" class="w-full mt-6 py-4 bg-violet-600 text-white rounded-xl font-semibold hover:bg-violet-700 transition-colors shadow-lg shadow-violet-200">
+                            Get Support Resources
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center space-x-6 text-sm text-gray-500">
-                    <a href="#" class="hover:text-indigo-600 transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-indigo-600 transition-colors">Terms of Service</a>
-                    <button class="text-gray-400 hover:text-indigo-600 transition-colors flex items-center space-x-1">
-                        <i class="fas fa-lock text-xs"></i>
-                        <span>Login as Admin</span>
-                    </button>
+            </div>
+
+            <!-- Mode: FAQ / Resources -->
+            <div id="mode-faq" class="hidden chat-overlay active">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden min-h-[500px] flex flex-col">
+                    <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div class="flex items-center gap-3">
+                            <button onclick="resetView()" class="p-2 hover:bg-white rounded-full transition-colors">
+                                <i data-lucide="arrow-left" class="w-5 h-5 text-slate-600"></i>
+                            </button>
+                            <h2 class="text-xl font-bold text-slate-800">Health Resources</h2>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg">General FAQ</button>
+                            <button class="px-4 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100 rounded-lg">Common Injuries</button>
+                        </div>
+                    </div>
+                    <div class="p-8 grid md:grid-cols-2 gap-6 overflow-y-auto">
+                        <!-- FAQ Card 1 -->
+                        <div class="p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-100 transition-colors">
+                                    <i data-lucide="pill" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 mb-2">Where can I get medication on campus?</h3>
+                                    <p class="text-sm text-slate-500">The Student Health Center pharmacy is located in Building A, open Mon-Fri 9am-5pm.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Card 2 -->
+                        <div class="p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-100 transition-colors">
+                                    <i data-lucide="apple" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 mb-2">Nutrition and Diet Plans</h3>
+                                    <p class="text-sm text-slate-500">Consult with our campus nutritionist for balanced meal plans available in the dining halls.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Card 3 -->
+                        <div class="p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-orange-50 text-orange-600 rounded-xl group-hover:bg-orange-100 transition-colors">
+                                    <i data-lucide="band-aid" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 mb-2">Treating Minor Cuts</h3>
+                                    <p class="text-sm text-slate-500">Clean with water, apply antiseptic, and cover with a sterile bandage. Change daily.</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- FAQ Card 4 -->
+                         <div class="p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 bg-purple-50 text-purple-600 rounded-xl group-hover:bg-purple-100 transition-colors">
+                                    <i data-lucide="moon" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 mb-2">Sleep Hygiene Tips</h3>
+                                    <p class="text-sm text-slate-500">Maintain a regular schedule, avoid screens 1 hour before bed, and keep your room cool.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mt-4 text-center text-xs text-gray-400">
-                <p>Note: UniWell provides general health information and is not a substitute for professional medical advice. In case of emergency, call 911 or your local emergency number.</p>
+
+             <!-- Mode: First Aid -->
+             <div id="mode-firstaid" class="hidden chat-overlay active">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden min-h-[500px] flex flex-col">
+                    <div class="p-6 bg-emerald-600 text-white flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <button onclick="resetView()" class="p-2 hover:bg-emerald-500 rounded-full transition-colors">
+                                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                            </button>
+                            <h2 class="text-xl font-bold">First Aid Guide</h2>
+                        </div>
+                        <i data-lucide="briefcase-medical" class="w-6 h-6 opacity-50"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <button class="p-6 border-2 border-slate-100 rounded-2xl hover:border-emerald-500 hover:bg-emerald-50 transition-all text-left group">
+                                <i data-lucide="flame" class="w-8 h-8 text-orange-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                                <h3 class="font-bold text-lg mb-1">Burns</h3>
+                                <p class="text-sm text-slate-500">Cool under water, cover loosely.</p>
+                            </button>
+                            <button class="p-6 border-2 border-slate-100 rounded-2xl hover:border-emerald-500 hover:bg-emerald-50 transition-all text-left group">
+                                <i data-lucide="wind" class="w-8 h-8 text-blue-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                                <h3 class="font-bold text-lg mb-1">Choking</h3>
+                                <p class="text-sm text-slate-500">Back blows & abdominal thrusts.</p>
+                            </button>
+                            <button class="p-6 border-2 border-slate-100 rounded-2xl hover:border-emerald-500 hover:bg-emerald-50 transition-all text-left group">
+                                <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                                <h3 class="font-bold text-lg mb-1">Fainting</h3>
+                                <p class="text-sm text-slate-500">Lay flat, elevate legs.</p>
+                            </button>
+                        </div>
+                        <div class="mt-8 p-6 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-4">
+                            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 animate-pulse">
+                                <i data-lucide="phone-call" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-red-800">Emergency?</h4>
+                                <p class="text-red-600 text-sm">If the situation is life-threatening, call Campus Security or 911 immediately.</p>
+                            </div>
+                            <button class="ml-auto px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-md">Call Now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
-    </footer>
+        <!-- Admin Login Panel -->
+<div id="loginPanel" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center z-50">
+    
+    <div class="bg-white w-[350px] p-8 rounded-3xl shadow-2xl relative animate-fade-in">
+        
+        <button onclick="closeLogin()" class="absolute top-3 right-4 text-slate-400 hover:text-red-500 text-xl">✕</button>
+
+        <h2 class="text-2xl font-bold mb-6 text-center ">Admin Login</h2>
+
+        <form onsubmit="loginAdmin(event)" class="space-y-4">
+            <input id="adminUser" type="text" placeholder="Username"
+                   class="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
+
+            <input id="adminPass" type="password" placeholder="Password"
+                   class="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
+
+            <button class="w-full py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700">
+                Login
+            </button>
+        </form>
+
+        <p id="loginMsg" class="text-center text-sm mt-3 text-red-500"></p>
+    </div>
+</div>
+
+    </main>
+    
+    <!-- Footer -->
+<footer>
+    <div class="flex flex-col items-center gap-2">
+        <div class="h-px w-24 bg-slate-200 mb-2"></div>
+        <a onclick="openLogin()" class="text-xs font-medium text-slate-400 hover:text-indigo-600 transition-colors uppercase tracking-wider">
+            Login as Admin
+        </a>
+        <p class="text-[10px] text-slate-300">
+            &copy; 2023 UniWell Health Services. For educational purposes.
+        </p>
+    </div>
+</footer>
 
     <script src="script.js"></script>
-    </body>
+</body>
 </html>
