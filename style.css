@@ -389,6 +389,7 @@
 
   .symptomGuide, .mentalHealth, .knowledge, .firstAid{
     width: 100% !important;
+    height: 100% !important;
   }
 
   .symptomPage .header h1{
